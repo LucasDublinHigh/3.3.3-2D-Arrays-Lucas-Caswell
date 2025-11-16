@@ -1,0 +1,53 @@
+/*
+ * Activity 3.3.3
+ */
+public class Numbers2D {
+    public static void main(String[] args) {
+        int[][] numbers = {
+            {1, 5, 3, 8, -3, 0, 3},
+            {4, 4, 8, 0, 3, -1, 1},
+            {0, 3, 8, 4, -2, 7, 6}
+        };
+
+        int sum = 0;
+        int min = numbers[0][0];
+        int max = numbers[0][0];
+        int negativeCount = 0;
+        int totalElements = 0;
+
+        // Traverse the 2D array
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++) {
+                int value = numbers[i][j];
+                
+                // Sum
+                sum += value;
+
+                // Count negatives
+                if (value < 0) {
+                    negativeCount++;
+                }
+
+                // Find min and max
+                if (value < min) {
+                    min = value;
+                }
+                if (value > max) {
+                    max = value;
+                }
+
+                totalElements++;
+            }
+        }
+
+        // Calculate average
+        double average = (double) sum / totalElements;
+
+        // Print results
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+        System.out.println("Minimum value: " + min);
+        System.out.println("Maximum value: " + max);
+        System.out.println("Number of negative values: " + negativeCount);
+    }
+}
