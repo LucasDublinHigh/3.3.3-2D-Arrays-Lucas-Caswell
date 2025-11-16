@@ -1,0 +1,98 @@
+/*
+ * ImageModifier.java
+ * Demonstrates 2D array manipulations and test cases
+ */
+public class ImageModifier {
+    
+    // Print a 2D array
+    public static void print2D(String[][] arr) {
+        for (String[] row : arr) {
+            for (String elem : row) {
+                System.out.print(elem + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    // Check for duplicates
+    public static boolean hasDuplicates(String[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                for (int x = 0; x < arr.length; x++) {
+                    for (int y = 0; y < arr[x].length; y++) {
+                        if ((i != x || j != y) && arr[i][j].equals(arr[x][y])) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // Print consecutive pairs in each row
+    public static void printConsecutivePairs(String[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length - 1; j++) {
+                System.out.println("(" + arr[i][j] + ", " + arr[i][j + 1] + ")");
+            }
+        }
+    }
+
+    // Reverse a column
+    public static void reverseColumn(String[][] arr, int col) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            System.out.println(arr[i][col]);
+        }
+    }
+
+    // Shift first element of a row to the last
+    public static void shiftRow(String[][] arr, int row) {
+        String first = arr[row][0];
+        for (int j = 0; j < arr[row].length - 1; j++) {
+            arr[row][j] = arr[row][j + 1];
+        }
+        arr[row][arr[row].length - 1] = first;
+    }
+
+    // Shift last element of a column down
+    public static void shiftColumnDown(String[][] arr, int col) {
+        String last = arr[arr.length - 1][col];
+        for (int i = arr.length - 1; i > 0; i--) {
+            arr[i][col] = arr[i - 1][col];
+        }
+        arr[0][col] = last;
+    }
+
+    public static void main(String[] args) {
+        String[][] image = {
+            {"A", "B", "C", "D"},
+            {"E", "F", "G", "H"},
+            {"I", "J", "K", "L"}
+        };
+
+        System.out.println("Original 2D Array:");
+        print2D(image);
+
+        // Test duplicates
+        System.out.println("\nContains duplicates? " + hasDuplicates(image));
+
+        // Test consecutive pairs
+        System.out.println("\nConsecutive pairs:");
+        printConsecutivePairs(image);
+
+        // Test reverse column
+        System.out.println("\nReverse second column:");
+        reverseColumn(image, 1);
+
+        // Test shift row
+        shiftRow(image, 0);
+        System.out.println("\nAfter shifting first row:");
+        print2D(image);
+
+        // Test shift column down
+        shiftColumnDown(image, 3);
+        System.out.println("\nAfter shifting last column down:");
+        print2D(image);
+    }
+}
